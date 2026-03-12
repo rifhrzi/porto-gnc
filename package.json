@@ -1,0 +1,31 @@
+{
+  "name": "porto-gnc",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
+    "@react-three/postprocessing": "^2.19.1",
+    "framer-motion": "^12.23.26",
+    "nodemailer": "^6.10.0",
+    "lucide-react": "^0.562.0",
+    "postprocessing": "^6.38.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.11.0",
+    "three": "^0.183.2",
+    "three-stdlib": "^2.36.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^7.2.4"
+  }
+}

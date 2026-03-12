@@ -1,0 +1,229 @@
+.portfolio {
+  position: relative;
+}
+
+/* Filter Tabs */
+.filterTabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 48px;
+}
+
+.filterTab {
+  position: relative;
+  padding: 12px 24px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-light-secondary);
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  overflow: hidden;
+}
+
+.filterTab:hover {
+  color: var(--text-light-primary);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.filterTab.active {
+  color: var(--dark-bg);
+  border-color: transparent;
+}
+
+.activeIndicator {
+  position: absolute;
+  inset: 0;
+  background: var(--accent-gradient);
+  z-index: -1;
+  border-radius: 50px;
+}
+
+/* Projects Grid */
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+/* Project Card */
+.projectCard {
+  position: relative;
+  background: var(--light-bg-secondary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: all var(--transition-base);
+  will-change: transform, box-shadow;
+}
+
+.projectCard:hover {
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+/* Gradient accent bar at top of card */
+.cardAccent {
+  height: 4px;
+  background: var(--accent-gradient);
+}
+
+.projectContent {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.centeredProjectCard {
+  text-align: center;
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.04), rgba(124, 58, 237, 0.04));
+  border: 1px dashed rgba(0, 0, 0, 0.12);
+  box-shadow: none;
+}
+
+.projectContentCentered {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.centeredProjectCard .projectCategory,
+.centeredProjectCard .projectTitle,
+.centeredProjectCard .projectDescription {
+  width: 100%;
+}
+
+.projectCategory {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-secondary);
+  margin-bottom: 4px;
+}
+
+.projectTitle {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-light-primary);
+  margin-bottom: 8px;
+}
+
+.projectDescription {
+  font-size: 0.9rem;
+  color: var(--text-light-secondary);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: auto;
+}
+
+.techStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.techTag {
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-light-secondary);
+  background: var(--light-bg-tertiary);
+  border-radius: 50px;
+}
+
+.visitLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color var(--transition-base);
+}
+
+.visitLink:hover {
+  color: var(--accent-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .projectsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .projectContent {
+    padding: 24px;
+  }
+
+  .projectCategory {
+    font-size: 0.7rem;
+  }
+
+  .projectTitle {
+    font-size: 1.2rem;
+  }
+
+  .projectDescription {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .filterTabs {
+    gap: 6px;
+  }
+
+  .filterTab {
+    padding: 10px 16px;
+    font-size: 0.8rem;
+  }
+
+  .projectsGrid {
+    gap: 16px;
+  }
+
+  .projectContent {
+    padding: 20px;
+  }
+
+  .projectTitle {
+    font-size: 1.1rem;
+  }
+
+  .projectDescription {
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .cardFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .techTag {
+    font-size: 0.7rem;
+    padding: 5px 10px;
+  }
+}

@@ -1,0 +1,411 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dark-bg);
+  overflow: hidden;
+  padding-top: 120px;
+}
+
+/* Background Effects */
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  /* allow mouse events through for the shader */
+  z-index: 0;
+}
+
+/* Content */
+.container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.content {
+  max-width: 900px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 50px;
+  margin-bottom: 32px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-dark-secondary);
+}
+
+.badgeDot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 28px;
+  color: var(--text-dark-primary);
+}
+
+.titleLine {
+  display: block;
+}
+
+.highlight {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cursor {
+  display: inline-block;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+.description {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  color: var(--text-dark-secondary);
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: var(--accent-gradient);
+  color: var(--dark-bg);
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  box-shadow: 0 4px 30px rgba(0, 212, 255, 0.3);
+}
+
+.primaryButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 40px rgba(0, 212, 255, 0.5);
+}
+
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: transparent;
+  color: var(--text-dark-primary);
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.secondaryButton:hover {
+  border-color: var(--accent-primary);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+/* Stats Preview */
+.statsPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  padding: 30px 50px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 80px;
+}
+
+.statNumber {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  color: var(--text-dark-secondary);
+  text-align: center;
+}
+
+.statDivider {
+  width: 1px;
+  height: 50px;
+  background: var(--glass-border);
+  flex-shrink: 0;
+}
+
+/* Scroll Indicator */
+.scrollIndicator {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-dark-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  z-index: 10;
+}
+
+.scrollMouse {
+  width: 24px;
+  height: 40px;
+  border: 2px solid var(--text-dark-muted);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+  animation: scrollBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.scrollWheel {
+  width: 3px;
+  height: 8px;
+  background: var(--accent-primary);
+  border-radius: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 100px;
+    min-height: 90vh;
+  }
+
+  .content {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .badge {
+    font-size: 0.8rem;
+    padding: 8px 16px;
+  }
+
+  .title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .description {
+    font-size: 1rem;
+    margin-bottom: 32px;
+  }
+
+  .statsPreview {
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 28px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+
+  .statNumber {
+    font-size: 2rem;
+  }
+
+  .statLabel {
+    font-size: 0.8rem;
+  }
+
+  .statDivider {
+    width: 60px;
+    height: 1px;
+  }
+
+  .floatingIcons {
+    display: none;
+  }
+
+  .scrollIndicator {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) and (min-width: 481px) {
+  .statsPreview {
+    flex-direction: row;
+    gap: 24px;
+    padding: 24px 32px;
+    margin-bottom: 60px;
+  }
+
+  .statDivider {
+    width: 1px;
+    height: 40px;
+  }
+
+  .statNumber {
+    font-size: 1.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: 80px;
+  }
+
+  .content {
+    padding: 0 16px;
+  }
+
+  .title {
+    font-size: 2rem;
+    gap: 4px;
+  }
+
+  .description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 28px;
+    font-size: 0.9rem;
+  }
+
+  .statsPreview {
+    padding: 20px 24px;
+    margin-top: 48px;
+    margin-bottom: 48px;
+    gap: 18px;
+  }
+
+  .statNumber {
+    font-size: 1.65rem;
+  }
+
+  .statLabel {
+    font-size: 0.75rem;
+  }
+
+  .statDivider {
+    width: 50px;
+  }
+}
+
+@media (max-width: 375px) {
+  .statsPreview {
+    padding: 18px 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    gap: 14px;
+  }
+
+  .statNumber {
+    font-size: 1.5rem;
+  }
+
+  .statLabel {
+    font-size: 0.7rem;
+  }
+
+  .statDivider {
+    width: 40px;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+}

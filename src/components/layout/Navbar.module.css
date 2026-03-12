@@ -1,0 +1,260 @@
+.navbar {
+  position: fixed;
+  top: 24px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: calc(100% - 48px);
+  max-width: var(--container-max);
+  border-radius: var(--radius-xl);
+  z-index: 1000;
+  padding: 16px 0;
+  background: rgba(10, 15, 28, 0.3);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all var(--transition-base);
+}
+
+.navbar.scrolled {
+  top: 12px;
+  padding: 12px 0;
+  background: rgba(10, 15, 28, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logoIcon {
+  width: 36px;
+  height: 36px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diamond1,
+.diamond2 {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  transform: rotate(45deg);
+  border-radius: 3px;
+}
+
+.diamond1 {
+  background: var(--accent-primary);
+  top: 4px;
+  left: 4px;
+}
+
+.diamond2 {
+  background: var(--accent-secondary);
+  bottom: 4px;
+  right: 4px;
+}
+
+.logoText {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-dark-primary);
+  letter-spacing: 0.05em;
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navLink {
+  position: relative;
+  padding: 10px 16px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-dark-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  border-radius: var(--radius-sm);
+}
+
+.navLink:hover {
+  color: var(--text-dark-primary);
+}
+
+.navLink.active {
+  color: var(--text-dark-primary);
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  background: var(--accent-gradient);
+  border-radius: 2px;
+}
+
+.ctaButton {
+  padding: 12px 24px;
+  background: var(--accent-gradient);
+  color: var(--dark-bg);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(0, 212, 255, 0.5);
+}
+
+.mobileMenuButton {
+  display: none;
+  padding: 8px;
+  color: var(--text-dark-primary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.mobileMenu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  right: 0;
+  background: rgba(10, 15, 28, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  overflow: hidden;
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 8px;
+}
+
+.mobileNavLink {
+  padding: 16px 20px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-dark-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.mobileNavLink:hover,
+.mobileNavLink.active {
+  color: var(--text-dark-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.mobileCta {
+  margin-top: 12px;
+  padding: 16px 24px;
+  background: var(--accent-gradient);
+  color: var(--dark-bg);
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  border-radius: var(--radius-md);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .desktopNav,
+  .ctaButton {
+    display: none;
+  }
+
+  .mobileMenuButton {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    width: calc(100% - 32px);
+    top: 16px;
+  }
+
+  .navbar.scrolled {
+    top: 8px;
+    padding: 10px 0;
+  }
+
+  .logoText {
+    font-size: 1.1rem;
+  }
+
+  .logoIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .diamond1,
+  .diamond2 {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    width: calc(100% - 24px);
+  }
+
+  .container {
+    gap: 20px;
+  }
+
+  .logoText {
+    font-size: 1rem;
+  }
+
+  .mobileNavLink {
+    padding: 14px 16px;
+    font-size: 0.95rem;
+  }
+
+  .mobileCta {
+    padding: 14px 20px;
+    font-size: 0.85rem;
+  }
+}
+
+
+

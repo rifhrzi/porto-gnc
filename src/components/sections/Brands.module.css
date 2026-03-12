@@ -1,0 +1,418 @@
+.brands {
+  position: relative;
+  overflow: hidden;
+}
+
+.brandsGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.brandCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--glass-shadow);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all var(--transition-base);
+  will-change: transform, box-shadow;
+}
+
+.brandCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), rgba(124, 58, 237, 0.3));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.brandCard:hover::before {
+  opacity: 1;
+}
+
+.brandCard:hover {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), var(--accent-glow);
+}
+
+/* Expanded state */
+.brandCard.expanded {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 60px rgba(0, 212, 255, 0.2);
+  cursor: default;
+}
+
+.brandCard.expanded::before {
+  opacity: 1;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.5), rgba(124, 58, 237, 0.5));
+}
+
+/* Card content - horizontal layout */
+.cardContent {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+}
+
+.brandCard.expanded .cardContent {
+  gap: 32px;
+}
+
+/* Logo section (left side) */
+.logoSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-shrink: 0;
+  min-width: 200px;
+}
+
+.logoWrapper {
+  width: 140px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brandLogo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: brightness(1);
+  transition: filter var(--transition-base);
+}
+
+.brandCard:hover .brandLogo {
+  filter: brightness(1.1);
+}
+
+.brandName {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark-primary);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+/* Click hint */
+.clickToExpand {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--text-dark-muted);
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  transition: all var(--transition-fast);
+}
+
+.brandCard:hover .clickToExpand {
+  opacity: 1;
+  color: var(--accent-primary);
+}
+
+/* Description section (right side - slides in) */
+.descriptionSection {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  padding-left: 32px;
+  height: 100%;
+}
+
+.descriptionContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 280px;
+}
+
+.descriptionTitle {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-dark-secondary);
+}
+
+/* Website buttons */
+.websiteActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.websiteButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: var(--accent-gradient);
+  color: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 50%;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  margin: 0;
+}
+
+.websiteButton:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.websiteButton:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.websiteButton:focus-visible {
+  outline: 2px solid rgba(0, 212, 255, 0.9);
+  outline-offset: 2px;
+}
+
+/* Close button */
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: var(--text-dark-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  z-index: 10;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text-dark-primary);
+  transform: rotate(90deg);
+}
+
+/* Background decoration */
+.bgDecoration {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.glowOrb1,
+.glowOrb2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+}
+
+.glowOrb1 {
+  width: 400px;
+  height: 400px;
+  background: var(--accent-primary);
+  top: -100px;
+  left: -100px;
+}
+
+.glowOrb2 {
+  width: 350px;
+  height: 350px;
+  background: var(--accent-secondary);
+  bottom: -80px;
+  right: -80px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .brandsGrid {
+    gap: 32px;
+  }
+
+  .brandCard {
+    min-width: 260px;
+    max-width: 280px;
+  }
+
+  .brandCard.expanded {
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 768px) {
+  .brandsGrid {
+    gap: 20px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .brandCard {
+    padding: 28px;
+    width: 100% !important;
+    min-width: unset;
+    max-width: 100% !important;
+  }
+
+  .brandCard.expanded {
+    max-width: 100% !important;
+  }
+
+  .brandCard.expanded .cardContent {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .descriptionSection {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-left: 0;
+    padding-top: 24px;
+    width: 100%;
+  }
+
+  .websiteActions {
+    justify-content: center;
+  }
+
+  .descriptionContent {
+    min-width: unset;
+    text-align: center;
+    align-items: center;
+  }
+
+  .websiteButton {
+    width: 42px;
+    height: 42px;
+  }
+
+  .logoSection {
+    min-width: unset;
+    width: 100%;
+    align-items: center;
+  }
+
+  .logoWrapper {
+    width: 120px;
+    height: 80px;
+  }
+
+  .brandName {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+
+  .closeButton {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brandsGrid {
+    gap: 16px;
+  }
+
+  .brandCard {
+    padding: 24px 20px;
+  }
+
+  .logoWrapper {
+    width: 100px;
+    height: 70px;
+  }
+
+  .brandName {
+    font-size: 1rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .websiteButton {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+  }
+
+  .closeButton {
+    width: 32px;
+    height: 32px;
+    top: 12px;
+    right: 12px;
+  }
+}
+
+@media (max-width: 375px) {
+  .brandCard {
+    padding: 20px 16px;
+  }
+
+  .logoWrapper {
+    width: 90px;
+    height: 60px;
+  }
+
+  .brandName {
+    font-size: 0.95rem;
+  }
+
+  .description {
+    font-size: 0.8rem;
+  }
+
+  .websiteButton {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+  }
+}

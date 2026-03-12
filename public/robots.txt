@@ -1,0 +1,9 @@
+# Robots.txt for GNC Tech Portfolio
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://gnctech.com/sitemap.xml
+
+
+

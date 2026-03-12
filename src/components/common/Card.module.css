@@ -1,0 +1,95 @@
+.card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+/* Variants */
+.default {
+  background: var(--light-bg-secondary);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.default:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+.glass {
+  padding: 2px;
+}
+
+.glass .cardContent {
+  background: rgba(15, 22, 41, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-lg);
+  height: 100%;
+}
+
+.cardGlow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(124, 58, 237, 0.2));
+  border-radius: var(--radius-lg);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  filter: blur(20px);
+}
+
+.glass:hover .cardGlow {
+  opacity: 1;
+}
+
+.cardBorder {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  padding: 1px;
+  background: linear-gradient(135deg, var(--glass-border), transparent 50%);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: all var(--transition-base);
+}
+
+.glass:hover .cardBorder {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+}
+
+/* Padding Sizes */
+.padding-none .cardContent {
+  padding: 0;
+}
+
+.padding-small .cardContent {
+  padding: 16px;
+}
+
+.padding-medium .cardContent {
+  padding: 24px;
+}
+
+.padding-large .cardContent {
+  padding: 36px;
+}
+
+/* Dark Variant */
+.dark {
+  background: var(--dark-bg-secondary);
+  border: 1px solid var(--glass-border);
+}
+
+.dark:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 8px 30px rgba(0, 212, 255, 0.1);
+}
+
+
+

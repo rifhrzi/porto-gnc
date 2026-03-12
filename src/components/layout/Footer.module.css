@@ -1,0 +1,282 @@
+.footer {
+  position: relative;
+  background: var(--dark-bg);
+  padding: 80px 0 40px;
+  overflow: hidden;
+}
+
+.backgroundGrid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+.topSection {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.logoIcon {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diamond1,
+.diamond2 {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  transform: rotate(45deg);
+  border-radius: 3px;
+}
+
+.diamond1 {
+  background: var(--accent-primary);
+  top: 4px;
+  left: 4px;
+}
+
+.diamond2 {
+  background: var(--accent-secondary);
+  bottom: 4px;
+  right: 4px;
+}
+
+.logoText {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-dark-primary);
+  letter-spacing: 0.05em;
+}
+
+.tagline {
+  color: var(--text-dark-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 300px;
+}
+
+.linksSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.linkGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.linkTitle {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.navLinks,
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link {
+  color: var(--text-dark-secondary);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  width: fit-content;
+}
+
+.link:hover {
+  color: var(--text-dark-primary);
+}
+
+.address {
+  color: var(--text-dark-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+  margin-bottom: 40px;
+}
+
+.bottomSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.copyright {
+  color: var(--text-dark-muted);
+  font-size: 0.875rem;
+}
+
+.socialLinks {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--text-dark-secondary);
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+.socialLink:hover {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: var(--dark-bg);
+}
+
+.scrollTop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--accent-gradient);
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--dark-bg);
+  cursor: pointer;
+  transition: box-shadow var(--transition-base);
+}
+
+.scrollTop:hover {
+  box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .topSection {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .linksSection {
+    gap: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding: 60px 0 32px;
+  }
+
+  .linksSection {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .tagline {
+    max-width: 100%;
+  }
+
+  .logoText {
+    font-size: 1.3rem;
+  }
+
+  .logoIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .diamond1,
+  .diamond2 {
+    width: 16px;
+    height: 16px;
+  }
+
+  .bottomSection {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .scrollTop {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 100;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 48px 0 28px;
+  }
+
+  .topSection {
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+
+  .linkGroup h3 {
+    font-size: 0.95rem;
+  }
+
+  .linkGroup a {
+    font-size: 0.85rem;
+  }
+
+  .copyright {
+    font-size: 0.8rem;
+  }
+
+  .scrollTop {
+    width: 44px;
+    height: 44px;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+
