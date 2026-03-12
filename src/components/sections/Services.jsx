@@ -39,7 +39,7 @@ const ServiceCard = ({ service, index }) => {
           >
             <Icon size={28} />
           </motion.div>
-          <motion.h3 
+          <motion.h3
             className={styles.serviceTitle}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -63,17 +63,17 @@ const Services = () => {
   const safeValueDrivers = valueDrivers?.length
     ? valueDrivers
     : [
-        { title: 'Scalable Solutions' },
-        { title: 'Affordable Excellence' },
-        { title: 'Data-Driven Approach' },
-      ]
+      { title: 'Scalable Solutions' },
+      { title: 'Affordable Excellence' },
+      { title: 'Data-Driven Approach' },
+    ]
   const safeAudienceSegments = audienceSegments?.length
     ? audienceSegments
     : [
-        { title: 'SME/UMKM' },
-        { title: 'Scale-up Startups' },
-        { title: 'Established Enterprises' },
-      ]
+      { title: 'SME/UMKM' },
+      { title: 'Scale-up Startups' },
+      { title: 'Established Enterprises' },
+    ]
 
   return (
     <section id="services" className={`section section-dark ${styles.services}`}>
@@ -89,7 +89,7 @@ const Services = () => {
           whileInView="visible"
           viewport={viewportConfig}
         >
-          <motion.span 
+          <motion.span
             className="section-label"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -98,7 +98,7 @@ const Services = () => {
           >
             Layanan Kami
           </motion.span>
-          <motion.h2 
+          <motion.h2
             className="section-title"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -108,7 +108,7 @@ const Services = () => {
             Solusi yang Mendorong<br />
             <span className="text-gradient">Pertumbuhan Bisnis</span>
           </motion.h2>
-          <motion.p 
+          <motion.p
             className="section-description"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}

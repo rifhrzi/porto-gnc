@@ -99,7 +99,7 @@ const Contact = () => {
             whileInView="visible"
             viewport={viewportConfig}
           >
-            <motion.div 
+            <motion.div
               className={styles.infoCard}
               variants={fadeUpVariants}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
@@ -113,7 +113,7 @@ const Contact = () => {
               </div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className={styles.infoCard}
               variants={fadeUpVariants}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
@@ -127,7 +127,7 @@ const Contact = () => {
               </div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className={styles.infoCard}
               variants={fadeUpVariants}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}

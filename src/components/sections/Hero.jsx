@@ -69,13 +69,13 @@ const Hero = () => {
 
       {/* Content */}
       <div className={`container ${styles.container}`}>
-        <motion.div 
+        <motion.div
           className={styles.content}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <motion.div 
+          <motion.div
             className={styles.badge}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -85,7 +85,7 @@ const Hero = () => {
             <span>{heroContent?.badge || 'Mewujudkan Ide Menjadi Kenyataan'}</span>
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             className={styles.title}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -130,7 +130,7 @@ const Hero = () => {
         </motion.div>
 
         {/* Stats Preview */}
-        <motion.div 
+        <motion.div
           className={styles.statsPreview}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -142,7 +142,7 @@ const Hero = () => {
             { number: '7+', label: 'Tahun' }
           ].map((stat, index, array) => (
             <Fragment key={stat.label}>
-              <motion.div 
+              <motion.div
                 className={styles.statItem}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}

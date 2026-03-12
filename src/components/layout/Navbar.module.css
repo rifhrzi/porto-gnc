@@ -195,6 +195,7 @@
 
 /* Responsive */
 @media (max-width: 900px) {
+
   .desktopNav,
   .ctaButton {
     display: none;
@@ -255,6 +256,3 @@
     font-size: 0.85rem;
   }
 }
-
-
-

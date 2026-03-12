@@ -4,18 +4,18 @@
   --dark-bg: #0a0f1c;
   --dark-bg-secondary: #0f1629;
   --dark-bg-tertiary: #141b2d;
-  
+
   /* Light Theme Colors */
   --light-bg: #f8fafc;
   --light-bg-secondary: #ffffff;
   --light-bg-tertiary: #f1f5f9;
-  
+
   /* Accent Colors */
   --accent-primary: #00d4ff;
   --accent-secondary: #7c3aed;
   --accent-gradient: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
   --accent-glow: 0 0 40px rgba(0, 212, 255, 0.3);
-  
+
   /* Text Colors */
   --text-dark-primary: #ffffff;
   --text-dark-secondary: #94a3b8;
@@ -23,27 +23,27 @@
   --text-light-primary: #0f172a;
   --text-light-secondary: #475569;
   --text-light-muted: #94a3b8;
-  
+
   /* Typography - System fonts as fallback for faster initial render */
   --font-heading: 'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
   --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  
+
   /* Spacing */
   --section-padding: 120px;
   --container-max: 1280px;
   --container-padding: 24px;
-  
+
   /* Border Radius */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 20px;
   --radius-xl: 32px;
-  
+
   /* Transitions */
   --transition-fast: 0.15s ease;
   --transition-base: 0.3s ease;
   --transition-slow: 0.5s ease;
-  
+
   /* Glassmorphism */
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
@@ -71,6 +71,7 @@ html {
 
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -93,7 +94,12 @@ body {
 }
 
 /* ===== Typography ===== */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   font-weight: 600;
   line-height: 1.2;
@@ -126,7 +132,8 @@ a {
   transition: var(--transition-base);
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -143,7 +150,8 @@ button {
   background: none;
 }
 
-input, textarea {
+input,
+textarea {
   font-family: inherit;
   border: none;
   outline: none;
@@ -254,18 +262,24 @@ input, textarea {
 
 /* ===== Animations ===== */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-20px);
   }
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
@@ -275,19 +289,25 @@ input, textarea {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
 }
 
 @keyframes blink {
-  0%, 50% {
+
+  0%,
+  50% {
     opacity: 1;
   }
-  51%, 100% {
+
+  51%,
+  100% {
     opacity: 0;
   }
 }
@@ -344,4 +364,3 @@ input, textarea {
     padding-right: 16px;
   }
 }
-

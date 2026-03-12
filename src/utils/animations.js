@@ -29,9 +29,9 @@ export const containerVariants = {
 
 // Fade up animation variants
 export const fadeUpVariants = {
-  hidden: { 
-    opacity: 0, 
-    y: isMobileViewport() ? 20 : 30 
+  hidden: {
+    opacity: 0,
+    y: isMobileViewport() ? 20 : 30
   },
   visible: {
     opacity: 1,
@@ -45,9 +45,9 @@ export const fadeUpVariants = {
 
 // Fade in from left
 export const fadeInLeftVariants = {
-  hidden: { 
-    opacity: 0, 
-    x: isMobileViewport() ? -20 : -40 
+  hidden: {
+    opacity: 0,
+    x: isMobileViewport() ? -20 : -40
   },
   visible: {
     opacity: 1,
@@ -61,9 +61,9 @@ export const fadeInLeftVariants = {
 
 // Fade in from right
 export const fadeInRightVariants = {
-  hidden: { 
-    opacity: 0, 
-    x: isMobileViewport() ? 20 : 40 
+  hidden: {
+    opacity: 0,
+    x: isMobileViewport() ? 20 : 40
   },
   visible: {
     opacity: 1,
@@ -77,9 +77,9 @@ export const fadeInRightVariants = {
 
 // Scale up animation
 export const scaleUpVariants = {
-  hidden: { 
-    opacity: 0, 
-    scale: isMobileViewport() ? 0.95 : 0.9 
+  hidden: {
+    opacity: 0,
+    scale: isMobileViewport() ? 0.95 : 0.9
   },
   visible: {
     opacity: 1,
@@ -106,16 +106,16 @@ export const staggerContainerVariants = {
 // Card hover animation (disabled on mobile)
 export const cardHoverVariants = {
   rest: { scale: 1, y: 0 },
-  hover: isMobileViewport() 
+  hover: isMobileViewport()
     ? { scale: 1, y: 0 }
-    : { 
-        scale: 1.02, 
-        y: -8,
-        transition: {
-          duration: 0.3,
-          ease: [0.25, 0.46, 0.45, 0.94],
-        },
+    : {
+      scale: 1.02,
+      y: -8,
+      transition: {
+        duration: 0.3,
+        ease: [0.25, 0.46, 0.45, 0.94],
       },
+    },
 }
 
 // Icon animation on hover
@@ -124,14 +124,14 @@ export const iconHoverVariants = {
   hover: isMobileViewport()
     ? { scale: 1, rotate: 0 }
     : {
-        scale: 1.1,
-        rotate: 5,
-        transition: {
-          type: "spring",
-          stiffness: 300,
-          damping: 10,
-        },
+      scale: 1.1,
+      rotate: 5,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 10,
       },
+    },
 }
 
 // Viewport configuration for scroll animations
@@ -159,8 +159,8 @@ export const slideInVariants = (direction = 'up') => {
   }
 
   return {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       ...directions[direction]
     },
     visible: {
