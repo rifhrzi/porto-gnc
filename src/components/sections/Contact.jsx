@@ -31,12 +31,36 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
+  const openMailClientFallback = () => {
+    const subject = `${contactSection.form.mailtoSubjectPrefix} ${formData.name}`.trim()
+    const body = [
+      `${contactSection.form.nameLabel}: ${formData.name}`,
+      `${contactSection.form.emailLabel}: ${formData.email}`,
+      `${contactSection.form.companyLabel}: ${formData.company || '-'}`,
+      '',
+      `${contactSection.form.messageLabel}:`,
+      formData.message,
+    ].join('\n')
+
+    const mailtoUrl = `mailto:${companyInfo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    window.location.href = mailtoUrl
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (isSubmitting) return
 
     setIsSubmitting(true)
     setSubmitError('')
+
+    if (typeof window !== 'undefined' && window.location.hostname.endsWith('github.io')) {
+      openMailClientFallback()
+      setIsSubmitted(true)
+      setFormData({ name: '', email: '', company: '', message: '' })
+      setTimeout(() => setIsSubmitted(false), 5000)
+      setIsSubmitting(false)
+      return
+    }
 
     try {
       const response = await fetch('/api/contact', {
@@ -249,7 +273,11 @@ const Contact = () => {
                 {isSubmitting ? (
                   <span className={styles.loadingSpinner} />
                 ) : isSubmitted ? (
-                  <span>{contactSection.form.successLabel}</span>
+                  <span>
+                    {typeof window !== 'undefined' && window.location.hostname.endsWith('github.io')
+                      ? contactSection.form.mailClientOpenedLabel
+                      : contactSection.form.successLabel}
+                  </span>
                 ) : (
                   <>
                     <span>{contactSection.form.submitLabel}</span>
