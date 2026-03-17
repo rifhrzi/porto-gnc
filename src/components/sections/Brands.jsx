@@ -1,33 +1,14 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ExternalLink, Instagram } from 'lucide-react'
+import { useLanguage } from '../../context/LanguageContext'
 import { fadeUpVariants, scaleUpVariants, viewportConfig, isMobileViewport } from '../../utils/animations'
 import styles from './Brands.module.css'
 
-// Import brand logos
-// import teeliteClubLogo from '../../assets/teelite-club-logo.png' // TODO: Add this file
-import barenginLogo from '../../assets/barengin-logo.png'
-
-const brands = [
-  // Hapus komentar ketika teelite-club-logo.png sudah ditambahkan ke src/assets/
-  // {
-  //   id: 1,
-  //   name: "Teelite Club",
-  //   logo: teeliteClubLogo,
-  //   description: "Komunitas gaya hidup premium yang menawarkan keanggotaan eksklusif, event, dan peluang networking untuk profesional.",
-  //   website: "https://teeliteclub.com",
-  // },
-  {
-    id: 2,
-    name: "Barengin",
-    logo: barenginLogo,
-    description: "Platform sosial yang menghubungkan orang-orang untuk berbagi aktivitas dan pengalaman bersama, memudahkan Anda menemukan teman untuk berbagai kesempatan.",
-    website: "https://barenginaja.com",
-    instagram: "https://instagram.com/barengintix",
-  },
-]
-
 const Brands = () => {
+  const { content } = useLanguage()
+  const { brands, uiText } = content
+  const { brandsSection } = uiText
   const [expandedId, setExpandedId] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
 
@@ -62,9 +43,9 @@ const Brands = () => {
           whileInView="visible"
           viewport={viewportConfig}
         >
-          <span className="section-label">Brand Kami</span>
+          <span className="section-label">{brandsSection.label}</span>
           <h2 className="section-title">
-            Perusahaan di Bawah <span className="text-gradient">GNC Tech</span>
+            {brandsSection.title} <span className="text-gradient">{brandsSection.highlight}</span>
           </h2>
         </motion.div>
 
@@ -98,7 +79,7 @@ const Brands = () => {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
                       transition={{ duration: 0.2 }}
-                      aria-label="Close"
+                      aria-label={brandsSection.closeAriaLabel}
                     >
                       <X size={20} />
                     </motion.button>
@@ -130,7 +111,7 @@ const Brands = () => {
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.2 }}
                         >
-                          Klik untuk info lebih lanjut
+                          {brandsSection.clickToExpand}
                         </motion.span>
                       )}
                     </AnimatePresence>
@@ -150,7 +131,7 @@ const Brands = () => {
                         }}
                       >
                         <div className={styles.descriptionContent}>
-                          <h4 className={styles.descriptionTitle}>Tentang {brand.name}</h4>
+                          <h4 className={styles.descriptionTitle}>{brandsSection.descriptionTitlePrefix} {brand.name}</h4>
                           <p className={styles.description}>{brand.description}</p>
                           <div className={styles.websiteActions}>
                             {brand.website && (
@@ -162,7 +143,7 @@ const Brands = () => {
                                 onPointerDown={(e) => e.stopPropagation()}
                                 onMouseDown={(e) => e.stopPropagation()}
                                 onClick={(e) => e.stopPropagation()}
-                                aria-label={`Kunjungi website ${brand.name}`}
+                                aria-label={`${brandsSection.websiteAriaPrefix} ${brand.name}`}
                               >
                                 <ExternalLink size={16} />
                               </a>
@@ -176,7 +157,7 @@ const Brands = () => {
                                 onPointerDown={(e) => e.stopPropagation()}
                                 onMouseDown={(e) => e.stopPropagation()}
                                 onClick={(e) => e.stopPropagation()}
-                                aria-label={`Instagram ${brand.name}`}
+                                aria-label={`${brandsSection.instagramAriaPrefix} ${brand.name}`}
                               >
                                 <Instagram size={16} />
                               </a>

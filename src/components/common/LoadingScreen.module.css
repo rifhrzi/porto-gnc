@@ -17,37 +17,22 @@
   gap: 24px;
 }
 
-.logo {
-  width: 80px;
-  height: 80px;
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 8px;
+.logoFrame {
+  width: 152px;
+  height: 152px;
+  display: block;
+  overflow: hidden;
+  border-radius: 32px;
+  filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.28));
 }
 
-.diamond {
-  width: 32px;
-  height: 32px;
-  transform: rotate(45deg);
-  border-radius: 4px;
-}
-
-.diamond:nth-child(1) {
-  background: var(--accent-primary);
-}
-
-.diamond:nth-child(2) {
-  background: var(--accent-secondary);
-}
-
-.diamond:nth-child(3) {
-  background: var(--accent-secondary);
-}
-
-.diamond:nth-child(4) {
-  background: var(--accent-primary);
+.logoImage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  transform: scale(1.72);
+  transform-origin: center;
 }
 
 .text {
@@ -70,15 +55,9 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .logo {
-    width: 70px;
-    height: 70px;
-    gap: 6px;
-  }
-
-  .diamond {
-    width: 28px;
-    height: 28px;
+  .logoFrame {
+    width: 132px;
+    height: 132px;
   }
 
   .text {
@@ -92,15 +71,9 @@
 }
 
 @media (max-width: 480px) {
-  .logo {
-    width: 60px;
-    height: 60px;
-    gap: 5px;
-  }
-
-  .diamond {
-    width: 24px;
-    height: 24px;
+  .logoFrame {
+    width: 112px;
+    height: 112px;
   }
 
   .text {

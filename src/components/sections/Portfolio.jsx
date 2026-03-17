@@ -1,13 +1,13 @@
 import { useState, forwardRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
-import { projects, categories } from '../../data/content'
+import { useLanguage } from '../../context/LanguageContext'
 import { fadeUpVariants, scaleUpVariants, viewportConfig, isMobileViewport } from '../../utils/animations'
 import styles from './Portfolio.module.css'
 
-const ProjectCard = forwardRef(({ project, index }, ref) => {
+const ProjectCard = forwardRef(({ project, index, categories, visitLabel }, ref) => {
   const isMobile = isMobileViewport()
-  const isCenteredCard = (project.title || "").trim().toLowerCase() === "and many more"
+  const isCenteredCard = project.isSummaryCard
   
   return (
     <motion.div
@@ -55,7 +55,7 @@ const ProjectCard = forwardRef(({ project, index }, ref) => {
                 whileHover={{ x: 4 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span>Kunjungi</span>
+                <span>{visitLabel}</span>
                 <ExternalLink size={14} />
               </motion.a>
             )}
@@ -67,6 +67,9 @@ const ProjectCard = forwardRef(({ project, index }, ref) => {
 })
 
 const Portfolio = () => {
+  const { content } = useLanguage()
+  const { projects, categories, uiText } = content
+  const { portfolioSection } = uiText
   const [activeFilter, setActiveFilter] = useState('all')
 
   const filteredProjects = activeFilter === 'all'
@@ -84,14 +87,13 @@ const Portfolio = () => {
           whileInView="visible"
           viewport={viewportConfig}
         >
-          <span className="section-label">Portofolio Kami</span>
+          <span className="section-label">{portfolioSection.label}</span>
           <h2 className="section-title">
-            Menampilkan<br />
-            <span className="text-gradient">Karya Terbaik Kami</span>
+            {portfolioSection.title}<br />
+            <span className="text-gradient">{portfolioSection.highlight}</span>
           </h2>
           <p className="section-description">
-            Jelajahi portofolio kami yang beragam dari proyek-proyek sukses yang telah
-            diselesaikan di berbagai industri dan teknologi.
+            {portfolioSection.description}
           </p>
         </motion.div>
 
@@ -131,7 +133,13 @@ const Portfolio = () => {
         <motion.div className={styles.projectsGrid} layout>
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+                categories={categories}
+                visitLabel={portfolioSection.visitLabel}
+              />
             ))}
           </AnimatePresence>
         </motion.div>

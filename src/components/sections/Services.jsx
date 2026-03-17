@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Code2, Smartphone, Globe, Cloud, Shield, Brain, FileText, ArrowRight } from 'lucide-react'
-import { services, executiveBrief, valueDrivers, audienceSegments } from '../../data/content'
+import { useLanguage } from '../../context/LanguageContext'
 import SpotlightCard from '../common/SpotlightCard'
 import { fadeUpVariants, iconHoverVariants, viewportConfig, isMobileViewport } from '../../utils/animations'
 import styles from './Services.module.css'
@@ -56,10 +56,13 @@ const ServiceCard = ({ service, index }) => {
 }
 
 const Services = () => {
+  const { content } = useLanguage()
+  const { services, executiveBrief, valueDrivers, audienceSegments, uiText } = content
+  const { servicesSection } = uiText
   const missionText = executiveBrief?.mission ||
-    'Mengakselerasi transformasi digital melalui solusi yang tepat guna, efisien, dan kompetitif dari sisi biaya tanpa mengorbankan kualitas.'
+    'Accelerating digital transformation through practical, efficient, and cost-competitive solutions without compromising quality.'
   const positioningText = executiveBrief?.positioning ||
-    'Kami hadir sebagai mitra pertumbuhan dengan pendekatan teknologi, pemasaran digital, dan strategi bisnis yang berkelanjutan.'
+    'We act as a growth partner with a sustainable blend of technology, digital marketing, and business strategy.'
   const safeValueDrivers = valueDrivers?.length
     ? valueDrivers
     : [
@@ -96,7 +99,7 @@ const Services = () => {
             transition={{ duration: 0.5 }}
             viewport={viewportConfig}
           >
-            Layanan Kami
+            {servicesSection.label}
           </motion.span>
           <motion.h2
             className="section-title"
@@ -105,8 +108,8 @@ const Services = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={viewportConfig}
           >
-            Solusi yang Mendorong<br />
-            <span className="text-gradient">Pertumbuhan Bisnis</span>
+            {servicesSection.title}<br />
+            <span className="text-gradient">{servicesSection.highlight}</span>
           </motion.h2>
           <motion.p
             className="section-description"
@@ -142,12 +145,12 @@ const Services = () => {
           viewport={{ once: true }}
         >
           <div className={styles.ctaContent}>
-            <h3 className={styles.ctaTitle}>Butuh Solusi Khusus?</h3>
+            <h3 className={styles.ctaTitle}>{servicesSection.ctaTitle}</h3>
             <p className={styles.ctaText}>
               {positioningText}
             </p>
             <div className={styles.audiencePills}>
-              <span className={styles.audiencePrefix}>Rekomendasi untuk:</span>
+              <span className={styles.audiencePrefix}>{servicesSection.audiencePrefix}</span>
               {safeAudienceSegments.map((segment) => (
                 <span key={segment.id || segment.title} className={styles.audiencePill}>
                   {segment.title}
@@ -165,7 +168,7 @@ const Services = () => {
               document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' })
             }}
           >
-            Mulai Proyek
+            {servicesSection.ctaButtonLabel}
             <ArrowRight size={18} />
           </motion.a>
         </motion.div>

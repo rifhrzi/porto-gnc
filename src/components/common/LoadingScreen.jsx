@@ -1,8 +1,12 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { useLanguage } from '../../context/LanguageContext'
 import styles from './LoadingScreen.module.css'
 
 const LoadingScreen = () => {
+  const { content } = useLanguage()
+  const { companyInfo } = content
+
   // #region agent log
   useEffect(() => {
     const loadingMountTime = performance.now();
@@ -21,21 +25,23 @@ const LoadingScreen = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <motion.div 
-          className={styles.logo}
-          animate={{ 
-            rotate: 360,
+        <motion.div
+          className={styles.logoFrame}
+          animate={{
+            scale: [1, 1.04, 1],
           }}
-          transition={{ 
-            duration: 1,
+          transition={{
+            duration: 1.6,
             repeat: Infinity,
-            ease: "linear"
+            ease: "easeInOut"
           }}
         >
-          <div className={styles.diamond} />
-          <div className={styles.diamond} />
-          <div className={styles.diamond} />
-          <div className={styles.diamond} />
+          <img
+            src={companyInfo.logo}
+            alt=""
+            aria-hidden="true"
+            className={styles.logoImage}
+          />
         </motion.div>
         <motion.span 
           className={styles.text}
@@ -43,7 +49,7 @@ const LoadingScreen = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          GNC Tech
+          {companyInfo.name}
         </motion.span>
       </motion.div>
       <motion.div 
@@ -57,4 +63,3 @@ const LoadingScreen = () => {
 }
 
 export default LoadingScreen
-

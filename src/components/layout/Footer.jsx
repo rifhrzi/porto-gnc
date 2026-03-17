@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowUp, Linkedin, Twitter, Github, Instagram } from 'lucide-react'
-import { companyInfo, navLinks, socialLinks } from '../../data/content'
+import { useLanguage } from '../../context/LanguageContext'
 import styles from './Footer.module.css'
 
 const iconMap = {
@@ -11,7 +11,10 @@ const iconMap = {
 }
 
 const Footer = () => {
+  const { content } = useLanguage()
+  const { companyInfo, navLinks, socialLinks, uiText } = content
   const currentYear = new Date().getFullYear()
+  const { footerSection } = uiText
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -33,10 +36,14 @@ const Footer = () => {
         <div className={styles.topSection}>
           <div className={styles.brand}>
             <a href="#home" className={styles.logo} onClick={(e) => handleNavClick(e, '#home')}>
-              <div className={styles.logoIcon}>
-                <span className={styles.diamond1} />
-                <span className={styles.diamond2} />
-              </div>
+              <span className={styles.logoFrame}>
+                <img
+                  src={companyInfo.logo}
+                  alt=""
+                  aria-hidden="true"
+                  className={styles.logoImage}
+                />
+              </span>
               <span className={styles.logoText}>{companyInfo.name}</span>
             </a>
             <p className={styles.tagline}>{companyInfo.description}</p>
@@ -44,7 +51,7 @@ const Footer = () => {
 
           <div className={styles.linksSection}>
             <div className={styles.linkGroup}>
-              <h4 className={styles.linkTitle}>Navigasi</h4>
+              <h4 className={styles.linkTitle}>{footerSection.navTitle}</h4>
               <nav className={styles.navLinks}>
                 {navLinks.map((link) => (
                   <a
@@ -60,7 +67,7 @@ const Footer = () => {
             </div>
 
             <div className={styles.linkGroup}>
-              <h4 className={styles.linkTitle}>Kontak</h4>
+              <h4 className={styles.linkTitle}>{footerSection.contactTitle}</h4>
               <div className={styles.contactInfo}>
                 <a href={`mailto:${companyInfo.email}`} className={styles.link}>
                   {companyInfo.email}
@@ -78,7 +85,7 @@ const Footer = () => {
 
         <div className={styles.bottomSection}>
           <p className={styles.copyright}>
-            © {currentYear} {companyInfo.name}. Hak cipta dilindungi.
+            {footerSection.copyrightPrefix} {currentYear} {companyInfo.name}. {footerSection.copyrightSuffix}
           </p>
 
           <div className={styles.socialLinks}>

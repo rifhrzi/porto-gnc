@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Quote } from 'lucide-react'
-import { testimonials, aboutContent, executiveBrief, audienceSegments } from '../../data/content'
+import { useLanguage } from '../../context/LanguageContext'
 import { fadeUpVariants, viewportConfig } from '../../utils/animations'
 import styles from './About.module.css'
 
@@ -36,10 +36,9 @@ const TestimonialCard = ({ item }) => (
 )
 
 const About = () => {
-  const summaryText = aboutContent?.sectionDescription ||
-    "Kepuasan klien adalah prioritas utama kami. Dengarkan langsung pengalaman mereka bekerja sama dengan GNC Tech."
-  const positioningText = executiveBrief?.positioning ||
-    "Kami membantu organisasi menjalankan transformasi digital secara pragmatis, efektif, dan berkelanjutan."
+  const { content } = useLanguage()
+  const { testimonials, audienceSegments, uiText } = content
+  const { aboutSection } = uiText
   const safeAudienceSegments = audienceSegments?.length
     ? audienceSegments
     : [
@@ -59,13 +58,13 @@ const About = () => {
           whileInView="visible"
           viewport={viewportConfig}
         >
-          <span className="section-label">Testimoni</span>
+          <span className="section-label">{aboutSection.label}</span>
           <h2 className="section-title">
-            Apa Kata<br />
-            <span className="text-gradient">Klien Kami</span>
+            {aboutSection.title}<br />
+            <span className="text-gradient">{aboutSection.highlight}</span>
           </h2>
           <div className={styles.audiencePills}>
-            <span className={styles.audienceLabel}>Kami fokus pada:</span>
+            <span className={styles.audienceLabel}>{aboutSection.audienceLabel}</span>
             {safeAudienceSegments.map((segment) => (
               <span key={segment.id || segment.title} className={styles.audiencePill}>
                 {segment.title}

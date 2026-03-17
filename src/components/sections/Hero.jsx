@@ -1,20 +1,21 @@
 import { useState, useEffect, useRef, Fragment } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import { companyInfo, heroContent } from '../../data/content'
+import { useLanguage } from '../../context/LanguageContext'
 import Dither from '../common/Dither'
 import { fadeUpVariants, fadeInLeftVariants, fadeInRightVariants, buttonTapVariants, isMobileViewport } from '../../utils/animations'
 import styles from './Hero.module.css'
 
-const words = heroContent?.rotatingWords?.length
-  ? heroContent.rotatingWords
-  : ['Inovasi', 'Keunggulan', 'Solusi', 'Sukses']
-
 const Hero = () => {
+  const { content } = useLanguage()
+  const { heroContent } = content
   const [currentWord, setCurrentWord] = useState(0)
   const [displayText, setDisplayText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
   const heroRef = useRef(null)
+  const words = heroContent?.rotatingWords?.length
+    ? heroContent.rotatingWords
+    : ['Innovation', 'Growth', 'Impact', 'Scale']
 
   // Typing effect
   useEffect(() => {
@@ -37,7 +38,13 @@ const Hero = () => {
     }, isDeleting ? 50 : 100)
 
     return () => clearTimeout(timeout)
-  }, [displayText, isDeleting, currentWord])
+  }, [currentWord, displayText, isDeleting, words])
+
+  useEffect(() => {
+    setCurrentWord(0)
+    setDisplayText('')
+    setIsDeleting(false)
+  }, [words])
 
 
   const handleNavClick = (e, href) => {
@@ -82,7 +89,7 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <span className={styles.badgeDot} />
-            <span>{heroContent?.badge || 'Mewujudkan Ide Menjadi Kenyataan'}</span>
+            <span>{heroContent?.badge || 'Driving Digital Transformation'}</span>
           </motion.div>
 
           <motion.h1
@@ -91,14 +98,14 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <span className={styles.titleLine}>Membangun</span>
+            <span className={styles.titleLine}>{heroContent.titleLeading}</span>
             <span className={styles.titleLine}>
               <span className={styles.highlight}>
                 {displayText}
                 <span className={styles.cursor}>|</span>
               </span>
             </span>
-            <span className={styles.titleLine}>Masa Depan</span>
+            <span className={styles.titleLine}>{heroContent.titleTrailing}</span>
           </motion.h1>
 
           <motion.div
@@ -114,7 +121,7 @@ const Hero = () => {
               whileHover={isMobileViewport() ? {} : { scale: 1.05, y: -2 }}
               whileTap={buttonTapVariants.tap}
             >
-              Lihat Karya Kami
+              {heroContent.primaryActionLabel}
               <ArrowRight size={18} />
             </motion.a>
             <motion.a
@@ -124,7 +131,7 @@ const Hero = () => {
               whileHover={isMobileViewport() ? {} : { scale: 1.05 }}
               whileTap={buttonTapVariants.tap}
             >
-              Hubungi Kami
+              {heroContent.secondaryActionLabel}
             </motion.a>
           </motion.div>
         </motion.div>
@@ -136,11 +143,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.9 }}
         >
-          {[
-            { number: '150+', label: 'Proyek' },
-            { number: '50+', label: 'Klien' },
-            { number: '7+', label: 'Tahun' }
-          ].map((stat, index, array) => (
+          {heroContent.statsPreview.map((stat, index, array) => (
             <Fragment key={stat.label}>
               <motion.div
                 className={styles.statItem}

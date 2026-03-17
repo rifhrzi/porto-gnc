@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Send, Mail, Phone, MapPin, Linkedin, Twitter, Github, Instagram } from 'lucide-react'
-import { companyInfo, socialLinks } from '../../data/content'
+import { useLanguage } from '../../context/LanguageContext'
 import { fadeUpVariants, fadeInLeftVariants, fadeInRightVariants, viewportConfig, staggerContainerVariants } from '../../utils/animations'
 import styles from './Contact.module.css'
 
@@ -13,6 +13,9 @@ const iconMap = {
 }
 
 const Contact = () => {
+  const { content } = useLanguage()
+  const { companyInfo, socialLinks, uiText } = content
+  const { contactSection } = uiText
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -44,10 +47,10 @@ const Contact = () => {
         body: JSON.stringify(formData),
       })
 
-      const data = await response.json().catch(() => ({ ok: false, error: 'Respon tidak valid dari server.' }))
+      const data = await response.json().catch(() => ({ ok: false, error: contactSection.form.invalidResponse }))
 
       if (!response.ok || !data.ok) {
-        throw new Error(data?.error || 'Gagal mengirim pesan.')
+        throw new Error(data?.error || contactSection.form.requestFailed)
       }
 
       setIsSubmitted(true)
@@ -55,7 +58,7 @@ const Contact = () => {
       setSubmitError('')
       setTimeout(() => setIsSubmitted(false), 5000)
     } catch (error) {
-      setSubmitError(error instanceof Error ? error.message : 'Terjadi kesalahan saat mengirim pesan.')
+      setSubmitError(error instanceof Error ? error.message : contactSection.form.genericError)
       setIsSubmitted(false)
     } finally {
       setIsSubmitting(false)
@@ -79,14 +82,13 @@ const Contact = () => {
           whileInView="visible"
           viewport={viewportConfig}
         >
-          <span className="section-label">Hubungi Kami</span>
+          <span className="section-label">{contactSection.label}</span>
           <h2 className="section-title">
-            Mari Bangun Sesuatu<br />
-            <span className="text-gradient">yang Luar Biasa Bersama</span>
+            {contactSection.title}<br />
+            <span className="text-gradient">{contactSection.highlight}</span>
           </h2>
           <p className="section-description">
-            Siap memulai proyek berikutnya? Hubungi kami dan mari
-            diskusikan bagaimana kami dapat membantu mewujudkan visi Anda.
+            {contactSection.description}
           </p>
         </motion.div>
 
@@ -108,7 +110,7 @@ const Contact = () => {
                 <Mail size={24} />
               </div>
               <div className={styles.infoContent}>
-                <h4>Email Kami</h4>
+                <h4>{contactSection.emailTitle}</h4>
                 <a href={`mailto:${companyInfo.email}`}>{companyInfo.email}</a>
               </div>
             </motion.div>
@@ -122,7 +124,7 @@ const Contact = () => {
                 <Phone size={24} />
               </div>
               <div className={styles.infoContent}>
-                <h4>Hubungi Kami</h4>
+                <h4>{contactSection.phoneTitle}</h4>
                 <a href={`tel:${companyInfo.phone}`}>{companyInfo.phone}</a>
               </div>
             </motion.div>
@@ -136,13 +138,13 @@ const Contact = () => {
                 <MapPin size={24} />
               </div>
               <div className={styles.infoContent}>
-                <h4>Kunjungi Kami</h4>
+                <h4>{contactSection.addressTitle}</h4>
                 <p>{companyInfo.address}</p>
               </div>
             </motion.div>
 
             <div className={styles.socialSection}>
-              <h4>Ikuti Kami</h4>
+              <h4>{contactSection.followTitle}</h4>
               <div className={styles.socialLinks}>
                 {socialLinks.map((social) => {
                   const Icon = iconMap[social.icon]
@@ -176,7 +178,7 @@ const Contact = () => {
             <form className={styles.contactForm} onSubmit={handleSubmit}>
               <div className={styles.formRow}>
                 <div className={`${styles.inputGroup} ${isFieldActive('name') ? styles.active : ''}`}>
-                  <label htmlFor="name" className={styles.floatingLabel}>Nama Anda</label>
+                  <label htmlFor="name" className={styles.floatingLabel}>{contactSection.form.nameLabel}</label>
                   <input
                     type="text"
                     id="name"
@@ -191,7 +193,7 @@ const Contact = () => {
                 </div>
 
                 <div className={`${styles.inputGroup} ${isFieldActive('email') ? styles.active : ''}`}>
-                  <label htmlFor="email" className={styles.floatingLabel}>Alamat Email</label>
+                  <label htmlFor="email" className={styles.floatingLabel}>{contactSection.form.emailLabel}</label>
                   <input
                     type="email"
                     id="email"
@@ -207,7 +209,7 @@ const Contact = () => {
               </div>
 
               <div className={`${styles.inputGroup} ${isFieldActive('company') ? styles.active : ''}`}>
-                <label htmlFor="company" className={styles.floatingLabel}>Nama Perusahaan</label>
+                <label htmlFor="company" className={styles.floatingLabel}>{contactSection.form.companyLabel}</label>
                 <input
                   type="text"
                   id="company"
@@ -221,7 +223,7 @@ const Contact = () => {
               </div>
 
               <div className={`${styles.inputGroup} ${isFieldActive('message') ? styles.active : ''}`}>
-                <label htmlFor="message" className={styles.floatingLabel}>Pesan Anda</label>
+                <label htmlFor="message" className={styles.floatingLabel}>{contactSection.form.messageLabel}</label>
                 <textarea
                   id="message"
                   name="message"
@@ -247,13 +249,10 @@ const Contact = () => {
                 {isSubmitting ? (
                   <span className={styles.loadingSpinner} />
                 ) : isSubmitted ? (
-                  <>
-                    <span>Pesan Terkirim!</span>
-                    <span className={styles.checkmark}>✓</span>
-                  </>
+                  <span>{contactSection.form.successLabel}</span>
                 ) : (
                   <>
-                    <span>Kirim Pesan</span>
+                    <span>{contactSection.form.submitLabel}</span>
                     <Send size={18} />
                   </>
                 )}
